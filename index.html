@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mine Attack 5 – Whitelist & Spenden</title>
+<link rel="icon" href="logo.webp">
+<style>
+  :root{
+    --bg:#0b0610; --card:rgba(255,255,255,.05); --border:rgba(255,255,255,.1);
+    --red:#ff4d4d; --pink:#e04bff; --purple:#8b3dff; --text:#f3eefa; --muted:#a99bbd;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:Inter,-apple-system,"Segoe UI",Roboto,sans-serif;
+    background:var(--bg); color:var(--text); min-height:100vh; line-height:1.6;
+    overflow-x:hidden;
+  }
+  .glow{position:fixed;border-radius:50%;filter:blur(120px);opacity:.45;z-index:-1}
+  .g1{width:480px;height:480px;background:#b4161b;top:-120px;left:-120px}
+  .g2{width:520px;height:520px;background:var(--purple);bottom:-160px;right:-140px}
+  main{max-width:880px;margin:0 auto;padding:48px 20px 64px}
+  header{text-align:center;margin-bottom:40px}
+  header img{width:min(300px,70vw);height:auto;filter:drop-shadow(0 12px 40px rgba(255,60,60,.35));animation:float 5s ease-in-out infinite}
+  @keyframes float{50%{transform:translateY(-8px)}}
+  header p{color:var(--muted);margin-top:18px;font-size:1.1rem}
+  .notice{
+    display:flex;gap:14px;align-items:flex-start;
+    background:linear-gradient(135deg,rgba(255,77,77,.16),rgba(224,75,255,.12));
+    border:1px solid rgba(255,77,77,.45);border-radius:18px;padding:20px 22px;margin-bottom:28px;
+  }
+  .notice .ico{font-size:1.8rem;line-height:1}
+  .notice strong{color:#ff8a8a}
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:22px;
+    padding:30px;backdrop-filter:blur(14px);margin-bottom:28px;
+  }
+  h2{font-size:1.4rem;margin-bottom:6px}
+  .sub{color:var(--muted);margin-bottom:22px}
+  label{display:block;font-weight:600;font-size:.9rem;margin:0 0 8px;color:var(--muted)}
+  input[type=text],input[type=number]{
+    width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--border);
+    background:rgba(0,0,0,.35);color:var(--text);font-size:1rem;outline:none;transition:.2s;
+  }
+  input:focus{border-color:var(--pink);box-shadow:0 0 0 3px rgba(224,75,255,.2)}
+  .amounts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 14px}
+  .amounts button{
+    padding:14px 0;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.04);
+    color:var(--text);font-size:1.05rem;font-weight:700;cursor:pointer;transition:.2s;
+  }
+  .amounts button:hover{border-color:var(--pink)}
+  .amounts button.active{background:linear-gradient(135deg,var(--red),var(--pink));border-color:transparent}
+  .field{margin-bottom:20px}
+  .pay{
+    display:block;text-align:center;text-decoration:none;width:100%;padding:17px;border:0;border-radius:14px;cursor:pointer;
+    font-size:1.1rem;font-weight:800;color:#fff;
+    background:linear-gradient(135deg,#ff4d4d,#e04bff 55%,#8b3dff);
+    box-shadow:0 10px 30px rgba(224,75,255,.35);transition:.2s;
+  }
+  .pay:hover{transform:translateY(-2px);box-shadow:0 14px 38px rgba(224,75,255,.5)}
+  .hint{font-size:.85rem;color:var(--muted);text-align:center;margin-top:14px}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-top:8px}
+  .step{background:rgba(0,0,0,.25);border:1px solid var(--border);border-radius:16px;padding:18px}
+  .step b{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;
+    background:linear-gradient(135deg,var(--red),var(--purple));margin-bottom:10px}
+  .step p{color:var(--muted);font-size:.95rem}
+  footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:30px}
+  .fixed{padding:16px;border-radius:12px;border:1px solid var(--pink);background:rgba(224,75,255,.1);font-size:1.5rem;font-weight:800}
+  .fixed span{font-size:.85rem;font-weight:500;color:var(--muted);margin-left:8px}
+  .or{display:flex;align-items:center;gap:12px;color:var(--muted);margin:26px 0 18px;font-size:.9rem}
+  .or::before,.or::after{content:"";flex:1;height:1px;background:var(--border)}
+  .pool{display:block;text-align:center;text-decoration:none;color:var(--text);font-weight:700;padding:15px;
+    border-radius:14px;border:1px solid var(--pink);background:rgba(224,75,255,.1);transition:.2s}
+  .pool:hover{background:rgba(224,75,255,.25)}
+  @media(max-width:520px){.card{padding:22px}}
+</style>
+</head>
+<body>
+<div class="glow g1"></div><div class="glow g2"></div>
+<main>
+  <header>
+    <img src="logo.webp" alt="Mine Attack 5 Logo">
+    <p>Unterstütze unseren Minecraft-Server und sichere dir deinen Platz.</p>
+  </header>
+
+  <div class="notice">
+    <div class="ico">🔒</div>
+    <div>
+      <strong>Wichtig:</strong> Auf dem Server wird <strong>nur gewhitelisted, wer spendet</strong>.
+      Ohne Spende gibt es keinen Zugang. Gib bei der Spende unbedingt deinen Minecraft-Namen an.
+    </div>
+  </div>
+
+  <section class="card">
+    <h2>Jetzt spenden</h2>
+    <p class="sub">Die Spenden helfen, die Serverkosten zu decken. Gespendet wird sicher über den Collection Pot.</p>
+
+    <div class="field">
+      <label>Betrag</label>
+      <div class="fixed">1,00 € <span>einmalig</span></div>
+    </div>
+
+    <a class="pay" href="https://app.collectionpot.com/pot/3582297" target="_blank" rel="noopener">Jetzt spenden 💜</a>
+    <p class="hint">Du wirst zum Collection Pot weitergeleitet. <strong>Schreib dort unbedingt deinen Minecraft-Namen in die Nachricht</strong>, sonst können wir dich nicht whitelisten.</p>
+  </section>
+
+  <section class="card">
+    <h2>So kommst du auf die Whitelist</h2>
+    <div class="steps">
+      <div class="step"><b>1</b><p>1 € im Collection Pot spenden und deinen Minecraft-Namen in die Nachricht schreiben.</p></div>
+      <div class="step"><b>2</b><p>Spende abschicken.</p></div>
+      <div class="step"><b>3</b><p>Nach Eingang der Spende wirst du manuell gewhitelisted.</p></div>
+    </div>
+  </section>
+
+  <footer>© Mine Attack 5 · Kein offizielles Minecraft-Produkt. Nicht von Mojang oder Microsoft.</footer>
+</main>
+
+
+</body>
+</html>
